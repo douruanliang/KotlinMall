@@ -1,7 +1,9 @@
 package com.dourl.usercenter.ui.activity
 
 import android.os.Bundle
+import com.dourl.baselibrary.ext.onClick
 import com.dourl.baselibrary.ui.activity.BaseMvpActivity
+import com.dourl.baselibrary.widgets.VerifyButton
 import com.dourl.usercenter.R
 import com.dourl.usercenter.injection.component.DaggerUserComponent
 import com.dourl.usercenter.injection.module.UserModule
@@ -21,6 +23,16 @@ class RegisterActivity @Inject constructor() : BaseMvpActivity<RegisterPresenter
                 mPwdEt.text.toString(), "123"
             )
         }
+        mGetVerifyCodeBtn.setOnVerifyBtnClick(object : VerifyButton.OnVerifyBtnClick{
+            override fun onClick() {
+                toast("获取验证码") // TODO
+            }
+
+        })
+        mGetVerifyCodeBtn.onClick {
+            mGetVerifyCodeBtn.requestSendVerifyNumber()
+        }
+
     }
 
 

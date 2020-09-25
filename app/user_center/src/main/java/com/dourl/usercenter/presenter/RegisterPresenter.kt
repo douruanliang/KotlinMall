@@ -18,9 +18,13 @@ class RegisterPresenter @Inject constructor() : BasePresenter<RegisterView>() {
     @Inject
     lateinit var userService: UserServiceImpl
     fun register(mobile: String, pwd: String, verifyCode: String) {
-
+        if (!checkNetWork()){
+            println("no net")
+            return
+        }
+        mView.showLoading()
         userService.register(mobile, pwd, verifyCode)
-            .execute(object :BaseObserver<Boolean>(){
+            .execute(object :BaseObserver<Boolean>(mView){
                 override fun onNext(t: Boolean) {
                     super.onNext(t)
                     if (t)

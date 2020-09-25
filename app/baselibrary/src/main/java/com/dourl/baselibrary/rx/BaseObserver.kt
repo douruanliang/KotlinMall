@@ -1,5 +1,6 @@
 package com.dourl.baselibrary.rx
 
+import com.dourl.baselibrary.presenter.view.BaseView
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -8,9 +9,9 @@ import io.reactivex.disposables.Disposable
 @author: douruanliang
 @date: 2020/9/25
  */
-open class BaseObserver<T> : Observer<T> {
+open class BaseObserver<T>(val baseView: BaseView) : Observer<T> {
     override fun onComplete() {
-
+        baseView.hideLoading()
     }
 
     override fun onSubscribe(d: Disposable) {
@@ -22,6 +23,6 @@ open class BaseObserver<T> : Observer<T> {
     }
 
     override fun onError(e: Throwable) {
-        TODO("Not yet implemented")
+        baseView.hideLoading()
     }
 }

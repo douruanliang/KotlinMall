@@ -1,4 +1,4 @@
-package com.dourl.baselibrary.ui.activity
+package com.dourl.baselibrary.ui.fragment
 
 import android.os.Bundle
 import com.dourl.baselibrary.common.BaseApplication
@@ -8,7 +8,7 @@ import com.dourl.baselibrary.injection.module.ActivityModule
 import com.dourl.baselibrary.injection.module.LifecycleProviderModule
 import com.dourl.baselibrary.presenter.BasePresenter
 import com.dourl.baselibrary.presenter.view.BaseView
-import com.dourl.baselibrary.ui.fragment.BaseFragment
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 open abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
@@ -25,14 +25,13 @@ open abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
 
     abstract fun injectComponent()
     private fun initActivity() {
-        /*activityComponent = DaggerActivityComponent.builder()
+        activityComponent = DaggerActivityComponent.builder()
             .appComponent((activity as BaseApplication).appComponent)
-            .activityModule(ActivityModule( activity))
+            .activityModule(ActivityModule(activity!!))
             .lifecycleProviderModule(LifecycleProviderModule(this))
-            .build()*/
+            .build()
 
     }
-
 
 
     override fun showLoading() {
@@ -43,7 +42,7 @@ open abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
         TODO("Not yet implemented")
     }
 
-    override fun onError() {
-        TODO("Not yet implemented")
+    override fun onError(text: String) {
+        toast(text)
     }
 }
